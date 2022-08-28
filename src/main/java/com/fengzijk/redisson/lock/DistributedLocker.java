@@ -75,8 +75,19 @@ public interface DistributedLocker {
      * @author : guozhifeng
      * @date : 2022/8/28 17:48
      */
-    boolean tryLock(String lockKey, TimeUnit unit, int waitTime, int leaseTime);
-
+    RLock lock(String lockKey, TimeUnit unit, int waitTime, int leaseTime);
+    /**
+     * <pre>加锁操作支持过期解锁功能,最多等待多久就上锁leaseTime后以后自动解锁, 无需调用unlock方法手动解锁</pre>
+     *
+     * @param lockKey   redis key
+     * @param unit      时间单位
+     * @param waitTime  等待时间数值
+     * @param leaseTime 经过多久释放的数值
+     * @return boolean 加锁是否成功
+     * @author : guozhifeng
+     * @date : 2022/8/28 17:48
+     */
+    Boolean tryLock(String lockKey, TimeUnit unit, int waitTime, int leaseTime);
 
     /**
      * <pre>通过redisKey释放锁</pre>
@@ -94,4 +105,12 @@ public interface DistributedLocker {
      * @since : 2022/8/28
      */
     void unlock(RLock lock);
+
+    /**
+     * <pre>通过所对象释放锁会判断是否当前线程持有</pre>
+     *
+     * @param lock 对象
+     * @since : 2022/8/28
+     */
+    void unlockByHeldCurrentThread(RLock lock);
 }
