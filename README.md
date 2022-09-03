@@ -1,6 +1,6 @@
 # redisson-boot-starter
 
-Using common spring boot settings:
+## Using common spring boot settings:
 
 ``` yml
 spring:
