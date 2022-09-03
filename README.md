@@ -32,7 +32,7 @@ spring:
             <version>Latest Version</version>
         </dependency>
 ```
-## 使用例子
+## example
 ``` java
         RedissonLockUtil.lock("111111");
         
@@ -42,4 +42,5 @@ spring:
 
         RLock lock = RedissonLockUtil.lock(RedisKeyBuilder.keyBuilder("1111", ""), TimeUnit.SECONDS, 1, 2);
         
-        ```
+        RedissonLockUtil.unlock(lock);
+```
