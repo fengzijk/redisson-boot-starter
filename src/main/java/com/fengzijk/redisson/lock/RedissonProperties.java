@@ -31,19 +31,18 @@ import java.util.Arrays;
  * @since 2022/8/28
  */
 @ConfigurationProperties(prefix = "spring.redis.redisson")
-@ConditionalOnProperty("spring.redis.redisson.password")
+@ConditionalOnProperty(value = "spring.redis.redisson.enabled",havingValue ="true" )
 public class RedissonProperties {
+
+
+
+    private  boolean enabled;
     private int timeout = 3000;
-    private String port;
-    private String address;
-    private String password;
     private int database = 0;
     private int connectionPoolSize = 64;
     private int connectionMinimumIdleSize = 10;
     private int slaveConnectionPoolSize = 250;
     private int masterConnectionPoolSize = 250;
-    private String[] sentinelAddresses;
-    private String masterName;
 
     public int getTimeout() {
         return timeout;
@@ -53,29 +52,6 @@ public class RedissonProperties {
         this.timeout = timeout;
     }
 
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public int getDatabase() {
         return database;
@@ -117,36 +93,23 @@ public class RedissonProperties {
         this.masterConnectionPoolSize = masterConnectionPoolSize;
     }
 
-    public String[] getSentinelAddresses() {
-        return sentinelAddresses;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setSentinelAddresses(String[] sentinelAddresses) {
-        this.sentinelAddresses = sentinelAddresses;
-    }
-
-    public String getMasterName() {
-        return masterName;
-    }
-
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
     public String toString() {
         return "RedissonProperties{" +
                 "timeout=" + timeout +
-                ", port='" + port + '\'' +
-                ", address='" + address + '\'' +
-                ", password='" + password + '\'' +
                 ", database=" + database +
                 ", connectionPoolSize=" + connectionPoolSize +
                 ", connectionMinimumIdleSize=" + connectionMinimumIdleSize +
                 ", slaveConnectionPoolSize=" + slaveConnectionPoolSize +
                 ", masterConnectionPoolSize=" + masterConnectionPoolSize +
-                ", sentinelAddresses=" + Arrays.toString(sentinelAddresses) +
-                ", masterName='" + masterName + '\'' +
                 '}';
     }
 }
