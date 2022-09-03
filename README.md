@@ -32,3 +32,14 @@ spring:
             <version>Latest Version</version>
         </dependency>
 ```
+## 使用例子
+``` java
+        RedissonLockUtil.lock("111111");
+        
+        RedissonLockUtil.unlock("111111");
+        
+        Boolean aBoolean = RedissonLockUtil.tryLock(RedisKeyBuilder.keyBuilder("1111", ""), TimeUnit.SECONDS, 1, 2);
+
+        RLock lock = RedissonLockUtil.lock(RedisKeyBuilder.keyBuilder("1111", ""), TimeUnit.SECONDS, 1, 2);
+        
+        ```
